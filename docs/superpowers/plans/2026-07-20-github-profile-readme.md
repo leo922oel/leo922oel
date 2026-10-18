@@ -74,7 +74,7 @@ grep -nEi 'readme-stats|githubusercontent.*streak|typing-svg|profile-views|troph
 ```
 Expected: prints `clean: no heavy widgets`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 Two commits, each confirmed by Leo before running (per git-workflow policy):
 1. `README.md` — the profile page itself.
@@ -98,12 +98,11 @@ Do NOT push (Leo pushes manually).
 - [x] Commit as the personal account (`leo922oel@gmail.com`) so this repo's
       commits earn a contribution record; the earlier spec commit was
       re-authored before push.
-- [ ] Confirm commit messages, then commit (README first, then spec + plan).
-- [ ] Push to `main` to publish the profile page.
+- [x] Confirm commit messages, then commit (README first, then spec + plan).
+- [x] Push to `main` to publish the profile page.
+- [x] Add a repo description to `coevolve` (2026-10-19).
+- [x] Pin `coevolve` (2026-10-19). This replaced GitHub's auto-picked
+      "Popular repositories", which had shown `nachOS-Implementation`, a fork
+      with no commits of Leo's own.
 - [ ] Re-attribute `coevolve`'s commits to the account (link the work email,
       or rewrite the author), so the exception can be dropped.
-- [ ] Add a repo description to `coevolve`; it is empty and shows on a pinned card.
-- [ ] Pin `coevolve`. With no pinned repos, GitHub's auto-picked "Popular
-      repositories" shows `nachOS-Implementation`, a fork with no commits of
-      Leo's own; pinning replaces that list. This is a GitHub settings change,
-      not a file edit.

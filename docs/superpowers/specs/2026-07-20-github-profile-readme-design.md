@@ -89,11 +89,10 @@ No image badges.
 
 - Re-attribute `coevolve`'s commits to the account (link the work email, or
   rewrite the author), so the §3 exception can be dropped.
-- `coevolve` has no repo description; it shows empty on a pinned card.
-- Profile page outside the README: with no pinned repos, GitHub's auto-picked
-  "Popular repositories" shows `nachOS-Implementation`, a fork with no commits
-  of Leo's own, which breaks the §3 rule. Pinning `coevolve` replaces that
-  list. This is a GitHub settings change, not a README edit.
+
+Resolved (2026-10-19): `coevolve` now has a repo description and is pinned.
+Pinning replaced GitHub's auto-picked "Popular repositories", which had shown
+`nachOS-Implementation`, a fork with no commits of Leo's own.
 
 ## Success Criteria
 
