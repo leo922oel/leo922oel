@@ -56,17 +56,17 @@ Leo's own contribution record on GitHub (commits attributed to the
 - Forks with no commits of Leo's own (`semantic-router`, `honcho`) — linking
   an unmodified fork reads as claiming someone else's work.
 - Repos whose commits use an email not linked to the account — GitHub shows
-  no contribution record for them (see the `coevolve` exception below).
+  no contribution record for them.
 
 Currently eligible: `Grad-cam_FGSM` (sole author), `AI_Pet` (team project,
 majority of commits). **Decision (2026-10-18):** Leo chose not to list
 either — 2023 coursework would undersell the current focus.
 
-**Exception (2026-10-18):** `coevolve` is listed by Leo's decision. It is
-public and original, and it is the only public evidence of the self-evolution
-and meta-harness research, but its commits are still authored as
-`leo.lc.chien@deltaww.com`, which is not linked to the account. Once they are
-re-attributed, the exception is no longer needed.
+**Listed:** `coevolve` — public, original, sole author, and the public
+evidence for the self-evolution and meta-harness research. It was first listed
+under an exception (2026-10-18) because its commits were authored under an
+unlinked work email; they were re-attributed to the account on 2026-10-19, so
+it now passes the rule outright.
 
 Re-check eligibility before adding any other repo.
 
@@ -87,12 +87,13 @@ No image badges.
 
 ## Open Items
 
-- Re-attribute `coevolve`'s commits to the account (link the work email, or
-  rewrite the author), so the §3 exception can be dropped.
+None.
 
 Resolved (2026-10-19): `coevolve` now has a repo description and is pinned.
 Pinning replaced GitHub's auto-picked "Popular repositories", which had shown
-`nachOS-Implementation`, a fork with no commits of Leo's own.
+`nachOS-Implementation`, a fork with no commits of Leo's own. Its commits were
+re-attributed to the account by rewriting the author, so the §3 exception was
+dropped.
 
 ## Success Criteria
 
@@ -101,5 +102,5 @@ Pinning replaced GitHub's auto-picked "Popular repositories", which had shown
 - Header, About, Research focus, Tech Stack, and Connect present; Featured Projects present
   only if it has eligible entries. Text-first, no heavy widgets.
 - No private or contribution-less repo is referenced anywhere in the
-  README source, including HTML comments — the §3 `coevolve` exception aside.
+  README source, including HTML comments.
 - Leo can edit any section in under a minute without touching HTML.

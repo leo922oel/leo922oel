@@ -17,7 +17,7 @@
 - No image-based tech-stack badge walls; tech stack is one plain-text line.
 - Language: English.
 - **Repo eligibility:** reference a repo — in links, text, or HTML comments — only if it is public **and** carries Leo's own contribution record on GitHub (commits attributed to `leo922oel`). Excluded today: all private repos; `semantic-router` and `honcho` (forks with no own commits).
-- **`coevolve` exception:** listed by Leo's decision (2026-10-18) although its commits are still authored as `leo.lc.chien@deltaww.com`, which is not linked to the account. Re-attributing them is tracked in the checklist below.
+- **Featured:** `coevolve` — passes the rule since its commits were re-attributed to the account (2026-10-19); it was listed under an exception before that.
 - **Coursework not listed:** `Grad-cam_FGSM` and `AI_Pet` pass the rule but are 2023 coursework; Leo chose not to list them (2026-10-18).
 
 ---
@@ -49,8 +49,12 @@
 
 Run:
 ```bash
-# Repos linked from the README — expected: only coevolve
-grep -no 'github.com/leo922oel/[A-Za-z0-9_.-]*' README.md
+# Every repo linked from the README must be public and carry commits from leo922oel
+for r in $(grep -o 'github.com/leo922oel/[A-Za-z0-9_.-]*' README.md | cut -d/ -f3 | sort -u); do
+  priv=$(gh api "repos/leo922oel/$r" --jq '.private')
+  own=$(gh api "repos/leo922oel/$r/commits?author=leo922oel&per_page=1" --jq 'length')
+  if [ "$priv" = false ] && [ "$own" -gt 0 ]; then echo "ok: $r"; else echo "FAIL: $r (private=$priv own_commits=$own)"; fi
+done
 # Excluded forks must not appear anywhere, including comments
 grep -nEi 'semantic-router|honcho' README.md || echo "clean: no excluded repos"
 # Private repo names must not appear. -w is required: a private repo named
@@ -58,13 +62,7 @@ grep -nEi 'semantic-router|honcho' README.md || echo "clean: no excluded repos"
 gh api "user/repos?visibility=private&affiliation=owner&per_page=100" --jq '.[].name' \
   | grep -niwFf - README.md || echo "clean: no private repos"
 ```
-Expected: first command lists only `github.com/leo922oel/coevolve`; the other two print their `clean:` line.
-
-Before adding any repo later, confirm both conditions:
-```bash
-gh api "repos/leo922oel/<repo>" --jq '.private'                         # expect false
-gh api "repos/leo922oel/<repo>/commits?author=leo922oel" --jq 'length'  # expect > 0
-```
+Expected: the loop prints `ok: coevolve` and no `FAIL` line; the other two print their `clean:` line. After adding any repo later, run this step again.
 
 - [x] **Step 3: Confirm no forbidden elements**
 
@@ -88,7 +86,7 @@ Do NOT push (Leo pushes manually).
 
 - **Spec coverage:** Header ✓, About / Research focus ✓, Featured Projects (`coevolve`) ✓, Tech Stack line ✓, Connect / LinkedIn ✓.
 - **Placeholder scan:** none left — LinkedIn URL is filled in.
-- **Eligibility:** the only linked repo is `coevolve`, listed under the documented exception; Step 2 guards future edits.
+- **Eligibility:** the only linked repo is `coevolve`, which passes the rule; Step 2 checks every linked repo, so it guards future edits.
 
 ## Post-Implementation Checklist for Leo
 
@@ -104,5 +102,6 @@ Do NOT push (Leo pushes manually).
 - [x] Pin `coevolve` (2026-10-19). This replaced GitHub's auto-picked
       "Popular repositories", which had shown `nachOS-Implementation`, a fork
       with no commits of Leo's own.
-- [ ] Re-attribute `coevolve`'s commits to the account (link the work email,
-      or rewrite the author), so the exception can be dropped.
+- [x] Re-attribute `coevolve`'s commits to the account (2026-10-19): the
+      author was rewritten to `leo922oel@gmail.com` and force-pushed, so the
+      exception was dropped.
