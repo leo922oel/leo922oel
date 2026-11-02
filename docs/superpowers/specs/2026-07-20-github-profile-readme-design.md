@@ -90,6 +90,12 @@ exits non-zero). Both pass the rule: public repo, merged, authored and
 committed as `leo922oel`. Listed because they are the public evidence for the
 meta-harness research focus, on a framework built for exactly that.
 
+**Listed (2026-11-02):** `vllm-project/semantic-router` — #5344 (merged
+2026-10-22), a Dashboard fix that stops the Playground from adding the port
+offset to an in-network Router target. Passes the rule the same way; listed
+by Leo's decision as a merged fix to a widely used vLLM project. `harness2`
+comes first because it backs the research focus.
+
 ### 5. Tech Stack (lightweight, text-only)
 A single line of core skills separated by `·`, e.g.:
 `Python · PyTorch · LLM / Agent frameworks · Context Engineering · Evaluation · System Architecture · Docker`
@@ -107,9 +113,6 @@ No image badges.
 
 ## Open Items
 
-- `vllm-project/semantic-router` #5344 (merged 2026-10-22, authored as
-  `leo922oel`) passes the §4 rule but is not listed yet. Leo decides whether a
-  Playground port-offset fix belongs next to the `harness2` entries.
 - `google-research/harness2` #74 is open. Add it under §4 once it merges.
 
 Resolved (2026-10-19): `coevolve` now has a repo description and is pinned.

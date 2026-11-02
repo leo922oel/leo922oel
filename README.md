@@ -38,6 +38,8 @@ holds up into production.
 - **[google-research/harness2](https://github.com/google-research/harness2)** — Harness², a framework for recursive agent harnessing; two merged fixes to its JobBench rollout runner:
   - [#112](https://github.com/google-research/harness2/pull/112) — isolate each rollout's installs, temp files and workspace, so state leaked between rollouts can't pass for a harness edit's effect
   - [#122](https://github.com/google-research/harness2/pull/122) — note in the trajectory when a rollout times out or is killed, so a cut-off run no longer reads as a finished one
+- **[vllm-project/semantic-router](https://github.com/vllm-project/semantic-router)** — a programmable decision layer for models and compute; one merged fix to its Dashboard:
+  - [#5344](https://github.com/vllm-project/semantic-router/pull/5344) — stop the Playground from adding the port offset to an in-network Router target, which made every request on an offset stack fail with 502
 
 ---
 
