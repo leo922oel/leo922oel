@@ -27,7 +27,7 @@ Rationale: low maintenance, never looks dated, keeps focus on substance.
 
 ## Page Structure
 
-The README is a single file with five sections, top to bottom:
+The README is a single file with six sections, top to bottom:
 
 ### 1. Header
 - `# Hi, I'm Leo (Li Cheng Chien) 👋`
@@ -53,8 +53,10 @@ Table or list, one line per project (title link + one-sentence description).
 Leo's own contribution record on GitHub (commits attributed to the
 `leo922oel` account). This excludes:
 - Private repos.
-- Forks with no commits of Leo's own (`semantic-router`, `honcho`) — linking
-  an unmodified fork reads as claiming someone else's work.
+- Forks with no commits of Leo's own on their default branch
+  (`semantic-router`, `honcho`, `harness2`) — linking an unmodified fork reads
+  as claiming someone else's work. A PR sent from a fork is listed under §4,
+  via the upstream repo and the PR, never the fork.
 - Repos whose commits use an email not linked to the account — GitHub shows
   no contribution record for them.
 
@@ -70,12 +72,30 @@ it now passes the rule outright.
 
 Re-check eligibility before adding any other repo.
 
-### 4. Tech Stack (lightweight, text-only)
+### 4. Open-Source Contributions
+One top-level bullet per upstream repo (repo link + one-line description),
+with one nested bullet per merged PR (PR link + what it fixed and why that
+mattered).
+
+**Eligibility rule:** a contribution may be listed only if the upstream repo
+is public, the PR is **merged**, and the PR is authored by the `leo922oel`
+account with its commits attributed to it. Open or closed-unmerged PRs are not
+listed; add them once they merge. Link the upstream repo and the PR, never
+the fork the PR was sent from (see §3).
+
+**Listed (2026-11-02):** `google-research/harness2` — two merged fixes to the
+JobBench OpenCode runner: #112 (per-rollout isolation of installs, temp files
+and workspaces) and #122 (an `error` event in the trajectory when a rollout
+exits non-zero). Both pass the rule: public repo, merged, authored and
+committed as `leo922oel`. Listed because they are the public evidence for the
+meta-harness research focus, on a framework built for exactly that.
+
+### 5. Tech Stack (lightweight, text-only)
 A single line of core skills separated by `·`, e.g.:
 `Python · PyTorch · LLM / Agent frameworks · Context Engineering · Evaluation · System Architecture · Docker`
 No image badges.
 
-### 5. Connect
+### 6. Connect
 - LinkedIn badge linking to `https://www.linkedin.com/in/li-cheng-chien/`.
 
 ## Formatting Conventions
@@ -87,7 +107,10 @@ No image badges.
 
 ## Open Items
 
-None.
+- `vllm-project/semantic-router` #5344 (merged 2026-10-22, authored as
+  `leo922oel`) passes the §4 rule but is not listed yet. Leo decides whether a
+  Playground port-offset fix belongs next to the `harness2` entries.
+- `google-research/harness2` #74 is open. Add it under §4 once it merges.
 
 Resolved (2026-10-19): `coevolve` now has a repo description and is pinned.
 Pinning replaced GitHub's auto-picked "Popular repositories", which had shown
@@ -99,8 +122,9 @@ dropped.
 
 - Renders correctly on the GitHub profile page.
 - No broken links.
-- Header, About, Research focus, Tech Stack, and Connect present; Featured Projects present
-  only if it has eligible entries. Text-first, no heavy widgets.
-- No private or contribution-less repo is referenced anywhere in the
-  README source, including HTML comments.
+- Header, About, Research focus, Tech Stack, and Connect present; Featured Projects and
+  Open-Source Contributions present only if they have eligible entries.
+  Text-first, no heavy widgets.
+- No private or contribution-less repo, and no unmerged PR, is referenced
+  anywhere in the README source, including HTML comments.
 - Leo can edit any section in under a minute without touching HTML.

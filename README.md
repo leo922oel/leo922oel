@@ -33,6 +33,14 @@ holds up into production.
 
 ---
 
+## Open-Source Contributions
+
+- **[google-research/harness2](https://github.com/google-research/harness2)** — Harness², a framework for recursive agent harnessing; two merged fixes to its JobBench rollout runner:
+  - [#112](https://github.com/google-research/harness2/pull/112) — isolate each rollout's installs, temp files and workspace, so state leaked between rollouts can't pass for a harness edit's effect
+  - [#122](https://github.com/google-research/harness2/pull/122) — note in the trajectory when a rollout times out or is killed, so a cut-off run no longer reads as a finished one
+
+---
+
 ## Tech Stack
 
 Python · PyTorch · LLM / Agent frameworks · Context Engineering · Evaluation · System Architecture · Docker

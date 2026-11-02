@@ -4,7 +4,7 @@
 
 **Goal:** Replace the default `README.md` with a clean, text-first professional-technical GitHub profile landing page.
 
-**Architecture:** A single `README.md` at repo root using standard GitHub-Flavored Markdown. Five stacked sections (Header, About + Research focus, Featured Projects, Tech Stack, Connect). No external widgets, scripts, or images beyond one LinkedIn badge.
+**Architecture:** A single `README.md` at repo root using standard GitHub-Flavored Markdown. Six stacked sections (Header, About + Research focus, Featured Projects, Open-Source Contributions, Tech Stack, Connect). No external widgets, scripts, or images beyond one LinkedIn badge.
 
 **Tech Stack:** GitHub-Flavored Markdown only.
 
@@ -16,7 +16,8 @@
 - Text-first: no animated SVGs, visitor counters, trophy widgets, or `github-readme-stats` cards.
 - No image-based tech-stack badge walls; tech stack is one plain-text line.
 - Language: English.
-- **Repo eligibility:** reference a repo — in links, text, or HTML comments — only if it is public **and** carries Leo's own contribution record on GitHub (commits attributed to `leo922oel`). Excluded today: all private repos; `semantic-router` and `honcho` (forks with no own commits).
+- **Repo eligibility:** reference a repo — in links, text, or HTML comments — only if it is public **and** carries Leo's own contribution record on GitHub (commits attributed to `leo922oel`). Excluded today: all private repos; `semantic-router`, `honcho` and `harness2` (forks with no own commits on their default branch).
+- **Contribution eligibility:** list a PR to someone else's repo only if the repo is public, the PR is merged, and it is authored by `leo922oel` with commits attributed to the account. Link the upstream repo and the PR, never the fork. Listed: `google-research/harness2` #112 and #122 (2026-11-02).
 - **Featured:** `coevolve` — passes the rule since its commits were re-attributed to the account (2026-10-19); it was listed under an exception before that.
 - **Coursework not listed:** `Grad-cam_FGSM` and `AI_Pet` pass the rule but are 2023 coursework; Leo chose not to list them (2026-10-18).
 
@@ -38,8 +39,9 @@
 1. Header — name, role line, location, one-line tagline blockquote.
 2. About — job title with years of experience, the two internal products and Leo's part in them, and one sentence on the work (design → experiment → ship); then "Research focus": memory, compaction, meta-harness, self-evolution, LLM-as-a-Judge.
 3. Featured Projects — `coevolve`.
-4. Tech Stack — `Python · PyTorch · LLM / Agent frameworks · Context Engineering · Evaluation · System Architecture · Docker`
-5. Connect — LinkedIn badge.
+4. Open-Source Contributions — `google-research/harness2`, PRs #112 and #122, one nested bullet each.
+5. Tech Stack — `Python · PyTorch · LLM / Agent frameworks · Context Engineering · Evaluation · System Architecture · Docker`
+6. Connect — LinkedIn badge.
 
 > Note: the single LinkedIn badge is the one exception to "no badges" — it is a
 > conventional, static link affordance, not a stats/widget wall. If Leo prefers
@@ -55,14 +57,23 @@ for r in $(grep -o 'github.com/leo922oel/[A-Za-z0-9_.-]*' README.md | cut -d/ -f
   own=$(gh api "repos/leo922oel/$r/commits?author=leo922oel&per_page=1" --jq 'length')
   if [ "$priv" = false ] && [ "$own" -gt 0 ]; then echo "ok: $r"; else echo "FAIL: $r (private=$priv own_commits=$own)"; fi
 done
+# Every PR linked from the README must be merged and authored by leo922oel
+for p in $(grep -o 'github.com/[A-Za-z0-9_.-]*/[A-Za-z0-9_.-]*/pull/[0-9]*' README.md | sort -u); do
+  repo=${p#github.com/}; repo=${repo%/pull/*}; n=${p##*/}
+  gh api "repos/$repo/pulls/$n" --jq "if .merged and .user.login == \"leo922oel\" then \"ok: $repo#$n\" else \"FAIL: $repo#$n (merged=\(.merged) author=\(.user.login))\" end"
+done
+# Every upstream repo linked from the README must be public
+for r in $(grep -o 'github.com/[A-Za-z0-9_.-]*/[A-Za-z0-9_.-]*' README.md | grep -v '/leo922oel/' | cut -d/ -f2,3 | sort -u); do
+  gh api "repos/$r" --jq 'if .private then "FAIL: \(.full_name) is private" else "ok: \(.full_name) public" end'
+done
 # Excluded forks must not appear anywhere, including comments
-grep -nEi 'semantic-router|honcho' README.md || echo "clean: no excluded repos"
+grep -nEi 'semantic-router|honcho|leo922oel/harness2' README.md || echo "clean: no excluded repos"
 # Private repo names must not appear. -w is required: a private repo named
 # "OS" would otherwise match inside "Most" / "across".
 gh api "user/repos?visibility=private&affiliation=owner&per_page=100" --jq '.[].name' \
   | grep -niwFf - README.md || echo "clean: no private repos"
 ```
-Expected: the loop prints `ok: coevolve` and no `FAIL` line; the other two print their `clean:` line. After adding any repo later, run this step again.
+Expected: the repo loop prints `ok: coevolve`, the PR loop prints `ok: google-research/harness2#112` and `ok: google-research/harness2#122`, the upstream loop prints `ok: google-research/harness2 public`, no `FAIL` line appears, and the last two commands print their `clean:` line. After adding any repo or PR later, run this step again.
 
 - [x] **Step 3: Confirm no forbidden elements**
 
@@ -84,9 +95,9 @@ Do NOT push (Leo pushes manually).
 
 ## Self-Review
 
-- **Spec coverage:** Header ✓, About / Research focus ✓, Featured Projects (`coevolve`) ✓, Tech Stack line ✓, Connect / LinkedIn ✓.
+- **Spec coverage:** Header ✓, About / Research focus ✓, Featured Projects (`coevolve`) ✓, Open-Source Contributions (`harness2` #112, #122) ✓, Tech Stack line ✓, Connect / LinkedIn ✓.
 - **Placeholder scan:** none left — LinkedIn URL is filled in.
-- **Eligibility:** the only linked repo is `coevolve`, which passes the rule; Step 2 checks every linked repo, so it guards future edits.
+- **Eligibility:** the only own repo linked is `coevolve`, which passes the rule; the two linked PRs are merged and authored as `leo922oel`. Step 2 checks every linked repo and PR, so it guards future edits.
 
 ## Post-Implementation Checklist for Leo
 
@@ -105,3 +116,8 @@ Do NOT push (Leo pushes manually).
 - [x] Re-attribute `coevolve`'s commits to the account (2026-10-19): the
       author was rewritten to `leo922oel@gmail.com` and force-pushed, so the
       exception was dropped.
+- [x] List the two merged `google-research/harness2` PRs (#112, #122) under
+      Open-Source Contributions (2026-11-02).
+- [ ] Decide whether to list `vllm-project/semantic-router` #5344 (merged
+      2026-10-22); it passes the contribution rule.
+- [ ] Add `google-research/harness2` #74 once it merges.
